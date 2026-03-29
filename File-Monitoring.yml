@@ -17,3 +17,5 @@ spec:
                 - "/etc/passwd"
                 - "/etc/sudoers"
                 - "/etc/ssh/sshd_config"
+                - "/etc/ssh/ssh_host_rsa_key"
+                - "/etc/resolv.conf"
