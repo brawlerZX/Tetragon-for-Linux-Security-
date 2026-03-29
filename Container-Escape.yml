@@ -1,0 +1,14 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: rhel9-container-escape
+spec:
+  lsmHooks:
+    - hook: "security_bprm_check"
+      selectors:
+        - matchNamespaces:
+            - operator: "Different"
+              fields:
+                - "pid"
+                - "mnt"
+                - "user"
