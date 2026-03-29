@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: rhel9-reverse-shell
+spec:
+  kprobes:
+    - call: "tcp_connect"
+      syscall: false
+      args:
+        - index: 0
+          type: sock
+      selectors:
+        - matchBinaries:
+            - "!/usr/bin/ssh"
+        - matchArgs:
+            - index: 0
+              operator: NotIn
+              values:
+                - "22"
+                - "443"
