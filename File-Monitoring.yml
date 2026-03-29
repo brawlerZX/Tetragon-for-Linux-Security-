@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: rhel9-critical-file-write
+spec:
+  kprobes:
+    - call: "vfs_write"
+      args:
+        - index: 1
+          type: filename
+      selectors:
+        - matchArgs:
+            - index: 1
+              operator: In
+              values:
+                - "/etc/shadow"
+                - "/etc/passwd"
+                - "/etc/sudoers"
+                - "/etc/ssh/sshd_config"
