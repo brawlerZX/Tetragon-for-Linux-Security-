@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: rhel9-process-exec-monitor
+spec:
+  processExec:
+    - matchBinaries:
+        - "/bin/bash"
+        - "/bin/sh"
+        - "/usr/bin/python3"
+        - "/usr/bin/wget"
+        - "/usr/bin/curl"
+        - "/usr/bin/nc"
+        - "/usr/bin/socat"
+        - "/usr/bin/perl"
+        - "/usr/bin/nmap"
+      action: "report"
+
+# Experimental - Covered already without policy 
