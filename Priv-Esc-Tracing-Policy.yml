@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: privilege-escalation-detector
+spec:
+  lsmHooks:
+    - hook: "cap_capable"
+      args:
+        - index: 0
+          type: capability
+      selectors:
+        - matchArgs:
+            - index: 0
+              operator: In
+              values:
+                - "CAP_SYS_ADMIN"
+                - "CAP_SETUID"
+                - "CAP_SETGID"
+                - "CAP_DAC_OVERRIDE"
